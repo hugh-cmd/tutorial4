@@ -1,1 +1,23 @@
 
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v2
+
+    - name: 设置 Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: 构建项目
+      run: mvn clean install
+
+    - name: 运行测试
+      run: mvn clean test
